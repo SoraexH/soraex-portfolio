@@ -1,9 +1,21 @@
 
 import React from 'react';
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+
+const Button = ({ children, ...props }) => (
+  <button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90" {...props}>
+    {children}
+  </button>
+);
 
 export default function GalaxyPortfolio() {
+  const portfolioItems = [
+    "1.png",
+    "af.png",
+    "ddada.png",
+    "untitled.png"
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#050011] to-[#0a0f23] text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -32,8 +44,8 @@ export default function GalaxyPortfolio() {
           Icons: 1500R$, Thumbnails: 2300R$, Ads: 1000R$ — includes tax. Delivery in 1–2 days.
         </p>
         <div className="flex justify-center gap-4">
-          <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">VIEW MY WORK</Button>
-          <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">therealsoraexx</Button>
+          <Button>VIEW MY WORK</Button>
+          <Button>therealsoraexx</Button>
         </div>
       </section>
 
@@ -41,15 +53,21 @@ export default function GalaxyPortfolio() {
         <h2 className="text-4xl text-center font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">My Graphics Portfolio</h2>
         <p className="text-center text-gray-400 mb-10">Click any image to view in full</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {["1.png", "af.png", "ddada.png", "untitled.png"].map((file, i) => (
-            <div key={i} className="bg-black bg-opacity-10 rounded-xl overflow-hidden border border-gray-700">
+          {portfolioItems.map((file, i) => (
+            <a
+              key={i}
+              href={`/portfolio/${file}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black bg-opacity-10 rounded-xl overflow-hidden border border-gray-700 block"
+            >
               <img
                 src={`/portfolio/${file}`}
                 alt={`GFX ${i + 1}`}
                 className="w-full h-48 object-cover"
-                onError={(e) => e.currentTarget.src = "https://via.placeholder.com/300x200?text=Image+failed+to+load"}
+                onError={(e) => e.currentTarget.src = 'https://via.placeholder.com/300x200?text=Image+failed+to+load'}
               />
-            </div>
+            </a>
           ))}
         </div>
       </section>
